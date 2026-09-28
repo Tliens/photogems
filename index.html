@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhotoGems — Free Photo Gallery to Browse &amp; Download</title>
+<meta name="description" content="PhotoGems is a hand-curated personal photo gallery by KuiGe. Browse curated photo collections and download full-resolution images for free.">
+<link rel="canonical" href="https://photogems.kuige.me/">
+<link rel="alternate" hreflang="en" href="https://photogems.kuige.me/">
+<link rel="alternate" hreflang="zh" href="https://photogems.kuige.me/?lang=zh">
+<link rel="alternate" hreflang="x-default" href="https://photogems.kuige.me/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PhotoGems">
+<meta property="og:title" content="PhotoGems — Free Photo Gallery to Browse &amp; Download">
+<meta property="og:description" content="A hand-curated personal photo gallery. Browse collections, download full-resolution images for free.">
+<meta property="og:url" content="https://photogems.kuige.me/">
+<meta property="og:image" content="https://photogems.kuige.me/og-image.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PhotoGems — Free Photo Gallery to Browse &amp; Download">
+<meta name="twitter:description" content="A hand-curated personal photo gallery. Browse collections, download full-resolution images for free.">
+<meta name="twitter:image" content="https://photogems.kuige.me/og-image.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ImageGallery","name":"PhotoGems","url":"https://photogems.kuige.me/","description":"A hand-curated personal photo gallery by KuiGe. Browse curated photo collections and download full-resolution images for free.","author":{"@type":"Person","name":"KuiGe","url":"https://kuige.me/"},"isAccessibleForFree":true,"license":"https://photogems.kuige.me/#faq"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I download the photos?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open any photo and click Download to save the full-resolution file. All photos are free for personal use."}},
+{"@type":"Question","name":"Are the photos free to use?","acceptedAnswer":{"@type":"Answer","text":"Photos are free to download and use for personal, non-commercial purposes. For commercial use, please contact the author first."}},
+{"@type":"Question","name":"Who made this gallery?","acceptedAnswer":{"@type":"Answer","text":"PhotoGems is the personal photo gallery of KuiGe (魁歌), curated by hand and served as a static site."}},
+{"@type":"Question","name":"How often is the gallery updated?","acceptedAnswer":{"@type":"Answer","text":"New photos are added whenever the collection grows. The Updated date on the homepage reflects the latest sync."}},
+{"@type":"Question","name":"What does the codename Lantai mean?","acceptedAnswer":{"@type":"Answer","text":"Lantai (兰台) was the imperial archive of the Han dynasty. This gallery keeps the same spirit: a quiet hall where images are collected and cared for."}}
+]}
+</script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f7f3ea; --card: #fffdf8; --line: #e6dfcf;
+  --text: #2b2e33; --muted: #8b8574;
+  --accent: #2f4858; --accent-soft: #5a7386; --seal: #b03a2e;
+  --chip: #efe9da; --chip-on: #2f4858; --chip-on-text: #f7f3ea;
+  --shadow: 0 1px 3px rgba(60,50,20,.08), 0 8px 24px rgba(60,50,20,.07);
+  --veil: rgba(20,23,28,.9);
+}
+:root[data-theme="dark"] {
+  --bg: #14171c; --card: #1d2128; --line: #2c323c;
+  --text: #e8e4d8; --muted: #8d919b;
+  --accent: #9fb8c8; --accent-soft: #6d8798; --seal: #d46a5a;
+  --chip: #232833; --chip-on: #9fb8c8; --chip-on-text: #14171c;
+  --shadow: 0 1px 3px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  --veil: rgba(10,11,14,.94);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased;
+  transition: background .25s, color .25s;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+
+/* ---------- header ---------- */
+header.top { display: flex; align-items: center; gap: 12px; padding: 20px 0 6px; }
+.logo { width: 40px; height: 40px; border-radius: 11px; flex: none; display: block; }
+.brand { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.brand b { font-size: 19px; letter-spacing: .01em; }
+.brand span { font-size: 12px; color: var(--muted); }
+.top-acts { margin-left: auto; display: flex; gap: 8px; }
+.tbtn { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--card); color: var(--text); cursor: pointer; font-size: 15px;
+  display: grid; place-items: center; font-family: inherit; transition: border-color .15s, transform .15s; }
+.tbtn:hover { border-color: var(--accent); transform: translateY(-1px); }
+.tbtn.wide { width: auto; padding: 0 13px; font-size: 13px; font-weight: 600; }
+
+/* ---------- hero ---------- */
+.hero { padding: 34px 0 8px; text-align: center; }
+.hero h1 { font-size: clamp(26px, 4.4vw, 40px); letter-spacing: -.01em; line-height: 1.18; }
+.hero h1 em { font-style: normal; color: var(--seal); }
+.hero .sub { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 620px; margin-left: auto; margin-right: auto; }
+.stats { margin-top: 14px; display: inline-flex; align-items: center; gap: 8px; font-size: 13px;
+  color: var(--muted); border: 1px solid var(--line); background: var(--card);
+  padding: 7px 14px; border-radius: 99px; }
+.stats b { color: var(--text); font-weight: 700; }
+.dot-sep { width: 3px; height: 3px; border-radius: 99px; background: var(--muted); opacity: .6; }
+
+/* ---------- filter bar ---------- */
+.filterbar { position: sticky; top: 0; z-index: 6; background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 12px; padding: 12px 0; margin-top: 22px; flex-wrap: wrap; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; min-width: 0; }
+.chip { border: none; cursor: pointer; font-family: inherit; font-size: 13px; padding: 7px 13px;
+  border-radius: 99px; background: var(--chip); color: var(--text); transition: background .15s, color .15s; }
+.chip:hover { filter: brightness(.96); }
+.chip.on { background: var(--chip-on); color: var(--chip-on-text); }
+.chip small { opacity: .65; font-size: 11px; margin-left: 3px; }
+.search { display: flex; align-items: center; gap: 7px; border: 1px solid var(--line);
+  background: var(--card); border-radius: 99px; padding: 7px 13px; width: 210px; color: var(--muted); flex: none; }
+.search input { border: none; outline: none; background: transparent; font-family: inherit;
+  font-size: 13px; width: 100%; color: var(--text); }
+
+/* ---------- masonry ---------- */
+.wall { columns: 4 230px; column-gap: 14px; padding: 22px 0 10px; }
+.card { position: relative; break-inside: avoid; margin-bottom: 14px; border-radius: 12px;
+  overflow: hidden; cursor: zoom-in; background: var(--chip); box-shadow: var(--shadow); }
+.card img { width: 100%; display: block; transition: transform .35s; }
+.card:hover img { transform: scale(1.03); }
+.card .ov { position: absolute; inset: auto 0 0 0; padding: 26px 12px 10px;
+  background: linear-gradient(transparent, rgba(10,12,16,.62)); color: #fff;
+  display: flex; align-items: flex-end; gap: 8px;
+  opacity: 0; transition: opacity .2s; pointer-events: none; }
+.card:hover .ov { opacity: 1; }
+.card .ov .nm { flex: 1; min-width: 0; font-size: 12.5px; font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card .ov .ct { font-size: 10.5px; opacity: .85; border: 1px solid rgba(255,255,255,.35);
+  padding: 2px 8px; border-radius: 99px; flex: none; max-width: 40%; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.dl { width: 30px; height: 30px; border-radius: 99px; border: none; flex: none; cursor: pointer;
+  background: rgba(255,255,255,.16); color: #fff; display: grid; place-items: center;
+  backdrop-filter: blur(4px); transition: background .15s; }
+.dl:hover { background: var(--seal); }
+.dl svg { width: 15px; height: 15px; }
+
+/* ---------- empty state ---------- */
+.empty { display: none; padding: 70px 0 50px; text-align: center; color: var(--muted); }
+.empty .e-ico { font-size: 54px; margin-bottom: 14px; }
+.empty h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+.empty p { font-size: 13.5px; line-height: 1.8; max-width: 420px; margin: 0 auto; }
+
+/* ---------- FAQ ---------- */
+.faq { padding: 44px 0 30px; }
+.faq h2 { font-size: 20px; margin-bottom: 16px; }
+.faq details { border: 1px solid var(--line); background: var(--card); border-radius: 12px;
+  padding: 14px 18px; margin-bottom: 10px; }
+.faq summary { cursor: pointer; font-weight: 600; font-size: 14px; list-style: none; display: flex; align-items: center; gap: 10px; }
+.faq summary::before { content: '+'; color: var(--seal); font-weight: 700; font-size: 16px; width: 14px; flex: none; }
+.faq details[open] summary::before { content: '−'; }
+.faq details p { margin-top: 10px; font-size: 13.5px; line-height: 1.85; color: var(--muted); }
+
+/* ---------- lightbox ---------- */
+.lb { position: fixed; inset: 0; z-index: 50; background: var(--veil);
+  display: none; align-items: center; justify-content: center; }
+.lb.open { display: flex; }
+.lb > img { max-width: 88vw; max-height: 78vh; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px;
+  border-radius: 99px; border: none; background: rgba(255,255,255,.1); color: #fff; font-size: 18px;
+  cursor: pointer; display: grid; place-items: center; transition: background .15s; }
+.lb-btn:hover { background: rgba(255,255,255,.25); }
+.lb-prev { left: 18px; } .lb-next { right: 18px; }
+.lb-close { position: absolute; top: 16px; right: 18px; transform: none; width: 38px; height: 38px; }
+.lb-counter { position: absolute; top: 26px; left: 26px; color: #9ca3af; font-size: 13px; }
+.lb-bar { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center;
+  gap: 12px; padding: 15px 22px; color: #e8e4d8; background: linear-gradient(transparent, rgba(0,0,0,.55)); flex-wrap: wrap; }
+.lb-bar .fname { font-size: 13.5px; font-weight: 600; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lb-meta { font-size: 12px; color: #9ca3af; flex: none; }
+.lb-actions { margin-left: auto; display: flex; gap: 9px; }
+.lb-act { display: inline-flex; align-items: center; gap: 7px; border: none; border-radius: 9px;
+  background: rgba(255,255,255,.12); color: #fff; padding: 8px 14px; font-size: 12.5px;
+  cursor: pointer; font-family: inherit; text-decoration: none; transition: background .15s; }
+.lb-act:hover { background: rgba(255,255,255,.24); }
+.lb-act.primary { background: var(--seal); }
+.lb-act.primary:hover { filter: brightness(1.12); }
+
+/* ---------- footer ---------- */
+footer { border-top: 1px solid var(--line); margin-top: 30px; padding: 26px 0 40px;
+  color: var(--muted); font-size: 12.5px; line-height: 2; }
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.codename { color: var(--seal); }
+
+#toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(14px);
+  background: #1f2329; color: #fff; padding: 10px 18px; border-radius: 99px; font-size: 13px;
+  opacity: 0; pointer-events: none; transition: all .25s; z-index: 80; max-width: 84vw; }
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 640px) {
+  .hero { padding-top: 24px; }
+  .search { width: 100%; order: 3; }
+  .filterbar { gap: 9px; }
+  .lb-bar .fname { max-width: 100%; }
+  .lb-actions { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img class="logo" src="/logo.png" alt="PhotoGems logo — Lantai pavilion" width="40" height="40">
+    <span class="brand"><b>PhotoGems</b><span data-i18n="brandSub">Curated photo gallery</span></span>
+    <span class="top-acts">
+      <button class="tbtn wide" id="langBtn" title="切换语言 / Switch language">中文</button>
+      <button class="tbtn" id="themeBtn" title="Theme" aria-label="Theme">🌙</button>
+      <a class="tbtn" id="ghBtn" href="https://github.com/Tliens/photogems" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 16 16" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      </a>
+    </span>
+  </header>
+
+  <section class="hero">
+    <h1 data-i18n="h1">A hand-curated <em>photo gallery</em>, free to browse &amp; download</h1>
+    <p class="sub" data-i18n="sub">Every photo here is picked and cared for by hand. Open any image to view it in full resolution and save it for free — for wallpapers, mood boards, references, or just the joy of looking.</p>
+    <div class="stats">
+      <span><b id="stN">0</b> <span data-i18n="photos">photos</span></span>
+      <span class="dot-sep"></span>
+      <span><b id="stC">0</b> <span data-i18n="collections">collections</span></span>
+      <span class="dot-sep"></span>
+      <span><span data-i18n="updated">Updated</span> <b id="stDate">—</b></span>
+    </div>
+  </section>
+
+  <div class="filterbar">
+    <div class="chips" id="chips"></div>
+    <div class="search">🔍<input id="searchIn" data-i18n-ph="searchPh" placeholder="Search photos…"></div>
+  </div>
+
+  <div class="wall" id="wall"></div>
+
+  <div class="empty" id="empty">
+    <div class="e-ico">🏛️</div>
+    <h2 data-i18n="emptyT">The gallery is being curated</h2>
+    <p data-i18n="emptyS">New photos are being selected and prepared. Check back soon — the first collections are on their way.</p>
+  </div>
+
+  <section class="faq" id="faq">
+    <h2 data-i18n="faqT">FAQ</h2>
+    <details>
+      <summary data-i18n="q1">Can I download the photos?</summary>
+      <p data-i18n="a1">Yes. Open any photo and click Download to save the full-resolution file. All photos are free for personal use.</p>
+    </details>
+    <details>
+      <summary data-i18n="q2">Are the photos free to use?</summary>
+      <p data-i18n="a2">Photos are free to download and use for personal, non-commercial purposes. For commercial use, please contact the author first.</p>
+    </details>
+    <details>
+      <summary data-i18n="q3">Who made this gallery?</summary>
+      <p data-i18n="a3">PhotoGems is the personal photo gallery of KuiGe (魁歌), curated by hand and served as a static site.</p>
+    </details>
+    <details>
+      <summary data-i18n="q4">How often is the gallery updated?</summary>
+      <p data-i18n="a4">New photos are added whenever the collection grows. The Updated date on the homepage reflects the latest sync.</p>
+    </details>
+    <details>
+      <summary data-i18n="q5">What does the codename “Lantai” mean?</summary>
+      <p data-i18n="a5">Lantai (兰台) was the imperial archive of the Han dynasty. This gallery keeps the same spirit: a quiet hall where images are collected and cared for.</p>
+    </details>
+  </section>
+
+  <footer>
+    <div>© 2026 <a href="https://kuige.me/" rel="noopener">KuiGe · 魁歌</a> · <a href="https://github.com/Tliens/photogems" rel="noopener">GitHub</a></div>
+    <div><span class="codename">兰台 · Lantai</span> — <span data-i18n="codename">the imperial archive of Han, now holding light and shadow.</span></div>
+  </footer>
+</div>
+
+<!-- lightbox -->
+<div class="lb" id="lb">
+  <span class="lb-counter" id="lbCount"></span>
+  <button class="lb-btn lb-close" id="lbClose" title="Close (Esc)">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" title="Previous (←)">‹</button>
+  <img id="lbImg" alt="">
+  <button class="lb-btn lb-next" id="lbNext" title="Next (→)">›</button>
+  <div class="lb-bar">
+    <span class="fname" id="lbName"></span>
+    <span class="lb-meta" id="lbMeta"></span>
+    <span class="lb-actions">
+      <a class="lb-act primary" id="lbDl" download>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span data-i18n="download">Download</span>
+      </a>
+    </span>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="/data.js"></script>
+<script type="module">
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtSize = n => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : (n / 1048576).toFixed(2) + ' MB';
+
+/* ---------- i18n ---------- */
+const L = {
+  en: {
+    title: 'PhotoGems — Free Photo Gallery to Browse & Download',
+    desc: 'PhotoGems is a hand-curated personal photo gallery by KuiGe. Browse curated photo collections and download full-resolution images for free.',
+    brandSub: 'Curated photo gallery',
+    h1: 'A hand-curated <em>photo gallery</em>, free to browse & download',
+    sub: 'Every photo here is picked and cared for by hand. Open any image to view it in full resolution and save it for free — for wallpapers, mood boards, references, or just the joy of looking.',
+    photos: 'photos', collections: 'collections', updated: 'Updated',
+    searchPh: 'Search photos…', all: 'All',
+    emptyT: 'The gallery is being curated',
+    emptyS: 'New photos are being selected and prepared. Check back soon — the first collections are on their way.',
+    faqT: 'FAQ',
+    q1: 'Can I download the photos?',
+    a1: 'Yes. Open any photo and click Download to save the full-resolution file. All photos are free for personal use.',
+    q2: 'Are the photos free to use?',
+    a2: 'Photos are free to download and use for personal, non-commercial purposes. For commercial use, please contact the author first.',
+    q3: 'Who made this gallery?',
+    a3: 'PhotoGems is the personal photo gallery of KuiGe (魁歌), curated by hand and served as a static site.',
+    q4: 'How often is the gallery updated?',
+    a4: 'New photos are added whenever the collection grows. The Updated date on the homepage reflects the latest sync.',
+    q5: 'What does the codename “Lantai” mean?',
+    a5: 'Lantai (兰台) was the imperial archive of the Han dynasty. This gallery keeps the same spirit: a quiet hall where images are collected and cared for.',
+    download: 'Download',
+    codename: 'the imperial archive of Han, now holding light and shadow.',
+    notFound: 'No photos match your search.',
+  },
+  zh: {
+    title: 'PhotoGems — 免费图片画廊 · 浏览与下载',
+    desc: 'PhotoGems 是魁歌亲手打理的图片画廊，按合集精选呈现，可免费下载原图。',
+    brandSub: '亲手打理的图片画廊',
+    h1: '一份亲手打理的<em>图片画廊</em>，免费浏览与下载',
+    sub: '这里的每一张图都经过亲手挑选与整理。点开任意图片即可查看原分辨率并免费保存——做壁纸、攒灵感、找参考，或者只是单纯地看一看。',
+    photos: '张图片', collections: '个合集', updated: '更新于',
+    searchPh: '搜索图片…', all: '全部',
+    emptyT: '画廊正在布展中',
+    emptyS: '新图片正在挑选与整理，第一批合集即将上架，请稍候再来。',
+    faqT: '常见问题',
+    q1: '图片可以下载吗？',
+    a1: '可以。打开任意图片点击「下载」即可保存原分辨率文件，所有图片仅供个人使用、完全免费。',
+    q2: '图片可以随便使用吗？',
+    a2: '图片可免费下载用于个人非商业用途；如需商业使用，请先联系作者取得授权。',
+    q3: '这个画廊是谁做的？',
+    a3: 'PhotoGems 是魁歌（KuiGe）的个人图片画廊，纯手工精选，静态部署。',
+    q4: '画廊多久更新一次？',
+    a4: '每逢收藏有新增就会同步上架，首页的「更新于」日期即最近一次同步时间。',
+    q5: '代号「兰台」是什么意思？',
+    a5: '兰台是汉代皇家藏书之所，这个画廊承其意：一间安静收藏光影的厅堂。',
+    download: '下载',
+    codename: '汉室藏书之台，今藏光影万象。',
+    notFound: '没有匹配的图片。',
+  },
+};
+let lang = 'en';
+const t = k => (L[lang][k] ?? L.en[k] ?? '');
+
+function applyLang(l) {
+  lang = L[l] ? l : 'en';
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = t('title');
+  $('meta[name="description"]').setAttribute('content', t('desc'));
+  $('meta[property="og:title"]').setAttribute('content', t('title'));
+  $('meta[property="og:description"]').setAttribute('content', t('desc'));
+  $('meta[property="og:locale"]').setAttribute('content', lang === 'zh' ? 'zh_CN' : 'en_US');
+  $$('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
+  $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  $('#langBtn').textContent = lang === 'zh' ? 'EN' : '中文';
+  const u = new URL(location.href);
+  if (lang === 'zh') u.searchParams.set('lang', 'zh'); else u.searchParams.delete('lang');
+  history.replaceState(null, '', u);
+  renderChips(); renderWall();
+}
+
+/* ---------- theme ---------- */
+const mq = matchMedia('(prefers-color-scheme: dark)');
+let themePref = localStorage.getItem('pg-theme') || 'auto';
+function resolveTheme() {
+  const mode = themePref === 'auto' ? (mq.matches ? 'dark' : 'light') : themePref;
+  document.documentElement.dataset.theme = mode;
+  $('#themeBtn').textContent = themePref === 'auto' ? '🌗' : mode === 'dark' ? '🌙' : '☀️';
+}
+function cycleTheme() {
+  themePref = themePref === 'auto' ? 'light' : themePref === 'light' ? 'dark' : 'auto';
+  localStorage.setItem('pg-theme', themePref);
+  resolveTheme();
+}
+mq.addEventListener('change', () => { if (themePref === 'auto') resolveTheme(); });
+
+/* ---------- data ---------- */
+const D = window.PG_DATA || { generated: 0, photos: [] };
+const imgUrl = p => `img/${encodeURIComponent(p.c)}/${encodeURIComponent(p.n)}`;
+const categories = [...new Set(D.photos.map(p => p.c))].sort((a, b) => a.localeCompare(b, 'zh'));
+const countOf = c => c === '__all__' ? D.photos.length : D.photos.filter(p => p.c === c).length;
+
+const state = { cat: '__all__', q: '', lbIndex: -1 };
+const view = () => {
+  let list = state.cat === '__all__' ? D.photos : D.photos.filter(p => p.c === state.cat);
+  if (state.q) list = list.filter(p => p.n.toLowerCase().includes(state.q));
+  return list;
+};
+
+/* ---------- render ---------- */
+function renderStats() {
+  $('#stN').textContent = D.photos.length;
+  $('#stC').textContent = categories.length;
+  $('#stDate').textContent = D.generated
+    ? new Date(D.generated).toISOString().slice(0, 10) : '—';
+}
+function renderChips() {
+  const chips = [{ k: '__all__', label: t('all') }, ...categories.map(c => ({ k: c, label: c }))];
+  $('#chips').innerHTML = chips.map(c =>
+    `<button class="chip ${state.cat === c.k ? 'on' : ''}" data-c="${esc(c.k)}">${esc(c.label)}<small>${countOf(c.k)}</small></button>`).join('');
+}
+function renderWall() {
+  const list = view();
+  const wall = $('#wall'), empty = $('#empty');
+  if (!D.photos.length) {
+    wall.style.display = 'none'; empty.style.display = 'block';
+    $('#searchIn').style.display = 'none';
+    return;
+  }
+  wall.style.display = ''; empty.style.display = 'none';
+  $('#searchIn').style.display = '';
+  if (!list.length) {
+    wall.innerHTML = `<div style="grid-column:1/-1;padding:46px 0;text-align:center;color:var(--muted);font-size:14px">${esc(t('notFound'))}</div>`;
+    return;
+  }
+  wall.innerHTML = list.map((p, i) => `
+    <figure class="card" data-i="${i}">
+      <img loading="lazy" decoding="async" src="${imgUrl(p)}" alt="${esc(p.n.replace(/\.[a-z0-9]+$/i, ''))}">
+      <span class="ov">
+        <span class="nm">${esc(p.n)}</span>
+        ${state.cat === '__all__' ? `<span class="ct">${esc(p.c)}</span>` : ''}
+        <a class="dl" href="${imgUrl(p)}" download="${esc(p.n)}" title="${esc(t('download'))}" aria-label="${esc(t('download'))}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        </a>
+      </span>
+    </figure>`).join('');
+}
+
+/* ---------- lightbox ---------- */
+function openLb(i) { state.lbIndex = i; $('#lb').classList.add('open'); renderLb(); }
+function closeLb() { $('#lb').classList.remove('open'); $('#lbImg').src = ''; state.lbIndex = -1; }
+function renderLb() {
+  const list = view(), p = list[state.lbIndex];
+  if (!p) return closeLb();
+  $('#lbImg').src = imgUrl(p);
+  $('#lbImg').alt = p.n;
+  $('#lbName').textContent = p.n; $('#lbName').title = p.n;
+  $('#lbMeta').textContent = `${p.c} · ${fmtSize(p.s)}`;
+  $('#lbCount').textContent = `${state.lbIndex + 1} / ${list.length}`;
+  const dl = $('#lbDl');
+  dl.href = imgUrl(p); dl.setAttribute('download', p.n);
+}
+function step(d) {
+  const list = view();
+  if (!list.length) return;
+  state.lbIndex = (state.lbIndex + d + list.length) % list.length;
+  renderLb();
+}
+
+/* ---------- toast ---------- */
+function toast(msg) {
+  const el = $('#toast');
+  el.textContent = msg; el.className = 'show';
+  clearTimeout(el._tm); el._tm = setTimeout(() => el.className = '', 2200);
+}
+
+/* ---------- events ---------- */
+$('#chips').addEventListener('click', e => {
+  const b = e.target.closest('[data-c]');
+  if (!b) return;
+  state.cat = b.dataset.c;
+  const u = new URL(location.href);
+  if (state.cat === '__all__') u.searchParams.delete('c'); else u.searchParams.set('c', state.cat);
+  history.replaceState(null, '', u);
+  renderChips(); renderWall();
+});
+$('#searchIn').addEventListener('input', e => { state.q = e.target.value.trim().toLowerCase(); renderWall(); });
+$('#wall').addEventListener('click', e => {
+  if (e.target.closest('.dl')) return;
+  const card = e.target.closest('[data-i]');
+  if (card) openLb(+card.dataset.i);
+});
+$('#lbClose').addEventListener('click', closeLb);
+$('#lbPrev').addEventListener('click', () => step(-1));
+$('#lbNext').addEventListener('click', () => step(1));
+$('#lb').addEventListener('click', e => { if (e.target === $('#lb')) closeLb(); });
+document.addEventListener('keydown', e => {
+  if ($('#lb').classList.contains('open')) {
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  }
+});
+$('#langBtn').addEventListener('click', () => { applyLang(lang === 'zh' ? 'en' : 'zh'); localStorage.setItem('pg-lang', lang); });
+$('#themeBtn').addEventListener('click', cycleTheme);
+
+/* ---------- init ---------- */
+const usp = new URLSearchParams(location.search);
+const urlLang = usp.get('lang');
+const urlCat = usp.get('c');
+if (urlCat && (urlCat === '__all__' || categories.includes(urlCat))) state.cat = urlCat;
+resolveTheme();
+const initLang = urlLang && L[urlLang] ? urlLang
+  : localStorage.getItem('pg-lang')
+  || (navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en');
+applyLang(initLang);
+renderStats();
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "948f2535a9dd4775a436c677b3c950e4"}'></script>
+</body>
+</html>
