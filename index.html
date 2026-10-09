@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PhotoGems 兰台画廊 — Free Photo Gallery to Browse &amp; Download</title>
+<title>PhotoGems — Free Photo Gallery to Browse &amp; Download</title>
 <meta name="description" content="PhotoGems is a hand-curated personal photo gallery by KuiGe. Browse curated photo collections and download full-resolution images for free.">
 <link rel="canonical" href="https://photogems.kuige.me/">
 <link rel="alternate" hreflang="en" href="https://photogems.kuige.me/">
 <link rel="alternate" hreflang="zh" href="https://photogems.kuige.me/?lang=zh">
 <link rel="alternate" hreflang="x-default" href="https://photogems.kuige.me/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="PhotoGems 兰台画廊">
-<meta property="og:title" content="PhotoGems 兰台画廊 — Free Photo Gallery to Browse &amp; Download">
+<meta property="og:site_name" content="PhotoGems">
+<meta property="og:title" content="PhotoGems — Free Photo Gallery to Browse &amp; Download">
 <meta property="og:description" content="A hand-curated personal photo gallery. Browse collections, download full-resolution images for free.">
 <meta property="og:url" content="https://photogems.kuige.me/">
 <meta property="og:image" content="https://photogems.kuige.me/og-image.png">
@@ -21,8 +21,8 @@
 <meta name="twitter:title" content="PhotoGems — Free Photo Gallery to Browse &amp; Download">
 <meta name="twitter:description" content="A hand-curated personal photo gallery. Browse collections, download full-resolution images for free.">
 <meta name="twitter:image" content="https://photogems.kuige.me/og-image.png">
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png?v=2">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ImageGallery","name":"PhotoGems","url":"https://photogems.kuige.me/","description":"A hand-curated personal photo gallery by KuiGe. Browse curated photo collections and download full-resolution images for free.","author":{"@type":"Person","name":"KuiGe","url":"https://kuige.me/"},"isAccessibleForFree":true,"license":"https://photogems.kuige.me/#faq"}
 </script>
@@ -31,8 +31,7 @@
 {"@type":"Question","name":"Can I download the photos?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open any photo and click Download to save the full-resolution file. All photos are free for personal use."}},
 {"@type":"Question","name":"Are the photos free to use?","acceptedAnswer":{"@type":"Answer","text":"Photos are free to download and use for personal, non-commercial purposes. For commercial use, please contact the author first."}},
 {"@type":"Question","name":"Who made this gallery?","acceptedAnswer":{"@type":"Answer","text":"PhotoGems is the personal photo gallery of KuiGe (魁歌), curated by hand and served as a static site."}},
-{"@type":"Question","name":"How often is the gallery updated?","acceptedAnswer":{"@type":"Answer","text":"New photos are added whenever the collection grows. The Updated date on the homepage reflects the latest sync."}},
-{"@type":"Question","name":"What does the codename Lantai mean?","acceptedAnswer":{"@type":"Answer","text":"Lantai (兰台) was the imperial archive of the Han dynasty. This gallery keeps the same spirit: a quiet hall where images are collected and cared for."}}
+{"@type":"Question","name":"How often is the gallery updated?","acceptedAnswer":{"@type":"Answer","text":"New photos are added whenever the collection grows. The Updated date on the homepage reflects the latest sync."}}
 ]}
 </script>
 <style>
@@ -61,13 +60,7 @@ body {
 }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
 
-/* ---------- header ---------- */
-header.top { display: flex; align-items: center; gap: 12px; padding: 20px 0 6px; }
-.logo { width: 40px; height: 40px; border-radius: 11px; flex: none; display: block; }
-.brand { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.brand b { font-size: 19px; letter-spacing: .01em; }
-.brand span { font-size: 12px; color: var(--muted); }
-.top-acts { margin-left: auto; display: flex; gap: 8px; }
+/* ---------- header buttons ---------- */
 .tbtn { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line);
   background: var(--card); color: var(--text); cursor: pointer; font-size: 15px;
   display: grid; place-items: center; font-family: inherit; transition: border-color .15s, transform .15s; }
@@ -163,11 +156,29 @@ header.top { display: flex; align-items: center; gap: 12px; padding: 20px 0 6px;
 .lb-act.primary:hover { filter: brightness(1.12); }
 
 /* ---------- footer ---------- */
-footer { border-top: 1px solid var(--line); margin-top: 30px; padding: 26px 0 40px;
-  color: var(--muted); font-size: 12.5px; line-height: 2; }
-footer a { color: var(--accent); text-decoration: none; }
-footer a:hover { text-decoration: underline; }
-.codename { color: var(--seal); }
+footer { margin-top: 30px; }
+
+/* ── KuiGe 站群统一基座 ───────────────────── */
+:root{--kg-ink:#1f2430;--kg-sub:#6b7280;--kg-accent:#f2603c;--kg-line:#e8e6e1;--kg-bg:#faf9f7}
+.kg-top{position:sticky;top:0;z-index:60;background:rgba(250,249,247,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--kg-line)}
+.kg-top-in{max-width:1120px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.kg-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--kg-ink);font-weight:700;font-size:17px}
+.kg-brand img{width:32px;height:32px;border-radius:9px;display:block}
+.kg-brand small{font-weight:500;color:var(--kg-sub);font-size:12px}
+.kg-nav{display:flex;align-items:center;gap:14px;font-size:14px}
+.kg-nav a{color:var(--kg-sub);text-decoration:none}
+.kg-nav a:hover{color:var(--kg-ink)}
+.kg-entry{background:var(--kg-ink);color:#fff!important;padding:6px 14px;border-radius:999px;text-decoration:none;font-size:13px}
+.kg-entry:hover{background:var(--kg-accent)}
+.kg-foot{background:var(--kg-bg);border-top:1px solid var(--kg-line);color:var(--kg-sub);font-size:13px;margin-top:0}
+.kg-foot-in{max-width:1120px;margin:0 auto;padding:36px 20px 28px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.kg-foot img{width:44px;height:44px;border-radius:12px;margin-bottom:2px}
+.kg-foot-brand{color:var(--kg-ink);font-weight:700;font-size:15px;margin:0}
+.kg-foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px}
+.kg-foot-links a{color:var(--kg-sub);text-decoration:none}
+.kg-foot-links a:hover{color:var(--kg-accent)}
+.kg-foot-copy{margin:4px 0 0;color:#9ca3af;font-size:12px}
+@media(max-width:640px){.kg-nav a:not(.kg-entry){display:none}}
 
 #toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(14px);
   background: #1f2329; color: #fff; padding: 10px 18px; border-radius: 99px; font-size: 13px;
@@ -184,19 +195,23 @@ footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <img class="logo" src="/logo.png" alt="PhotoGems logo — Lantai pavilion" width="40" height="40">
-    <span class="brand"><b>PhotoGems</b><span data-i18n="brandSub">Curated photo gallery</span></span>
-    <span class="top-acts">
-      <a class="tbtn wide kuige-entry" href="https://kuige.me/" target="_blank" rel="noopener" title="kuige.me" style="text-decoration:none"><img src="https://kuige.me/logo.png" alt="" width="16" height="16" style="width:16px;height:16px;border-radius:50%;vertical-align:-3px;margin-right:6px">魁歌</a>
-<button class="tbtn wide" id="langBtn" title="切换语言 / Switch language">中文</button>
+<header class="kg-top">
+  <div class="kg-top-in">
+    <a class="kg-brand" href="./">
+      <img src="favicon.png?v=2" alt="PhotoGems 吉祥物">
+      <span>PhotoGems<small data-i18n="brandSub">Curated photo gallery</small></span>
+    </a>
+    <nav class="kg-nav">
+      <button class="tbtn wide" id="langBtn" title="切换语言 / Switch language">中文</button>
       <button class="tbtn" id="themeBtn" title="Theme" aria-label="Theme">🌙</button>
       <a class="tbtn" id="ghBtn" href="https://github.com/Tliens/photogems" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
         <svg viewBox="0 0 16 16" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
       </a>
-    </span>
-  </header>
+      <a class="kg-entry" href="https://kuige.me/" target="_blank" rel="noopener">魁歌 · 全部作品</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
 
   <section class="hero">
     <h1 data-i18n="h1">A hand-curated <em>photo gallery</em>, free to browse &amp; download</h1>
@@ -241,17 +256,25 @@ footer a:hover { text-decoration: underline; }
       <summary data-i18n="q4">How often is the gallery updated?</summary>
       <p data-i18n="a4">New photos are added whenever the collection grows. The Updated date on the homepage reflects the latest sync.</p>
     </details>
-    <details>
-      <summary data-i18n="q5">What does the codename “Lantai” mean?</summary>
-      <p data-i18n="a5">Lantai (兰台) was the imperial archive of the Han dynasty. This gallery keeps the same spirit: a quiet hall where images are collected and cared for.</p>
-    </details>
   </section>
-
-  <footer>
-    <div>© 2026 <a href="https://github.com/Tliens/photogems" rel="noopener">GitHub</a></div>
-    <div><span class="codename">兰台 · Lantai</span> — <span data-i18n="codename">the imperial archive of Han, now holding light and shadow.</span></div>
-  </footer>
 </div>
+
+<footer class="kg-foot">
+  <div class="kg-foot-in">
+    <img src="favicon.png?v=2" alt="PhotoGems 吉祥物">
+    <p class="kg-foot-brand">PhotoGems</p>
+    <nav class="kg-foot-links">
+      <a href="https://kuige.me/" target="_blank" rel="noopener">魁歌主页</a>
+      <a href="https://icongems.kuige.me/" target="_blank" rel="noopener">IconGems</a>
+      <a href="https://picsqueeze.kuige.me/" target="_blank" rel="noopener">PicSqueeze 图片压缩</a>
+      <a href="https://collagemill.kuige.me/" target="_blank" rel="noopener">CollageMill 图片排版</a>
+      <a href="https://markgone.kuige.me/" target="_blank" rel="noopener">MarkGone 图片去水印</a>
+      <a href="https://vidgone.kuige.me/" target="_blank" rel="noopener">VidGone 视频去水印</a>
+      <a href="https://github.com/Tliens/photogems" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <p class="kg-foot-copy">© 2026 魁歌 KuiGe · 用 AI 构建 · <a href="https://kuige.me/" style="color:inherit">kuige.me</a></p>
+  </div>
+</footer>
 
 <!-- lightbox -->
 <div class="lb" id="lb">
@@ -302,10 +325,7 @@ const L = {
     a3: 'PhotoGems is the personal photo gallery of KuiGe (魁歌), curated by hand and served as a static site.',
     q4: 'How often is the gallery updated?',
     a4: 'New photos are added whenever the collection grows. The Updated date on the homepage reflects the latest sync.',
-    q5: 'What does the codename “Lantai” mean?',
-    a5: 'Lantai (兰台) was the imperial archive of the Han dynasty. This gallery keeps the same spirit: a quiet hall where images are collected and cared for.',
     download: 'Download',
-    codename: 'the imperial archive of Han, now holding light and shadow.',
     notFound: 'No photos match your search.',
   },
   zh: {
@@ -327,10 +347,7 @@ const L = {
     a3: 'PhotoGems 是魁歌（KuiGe）的个人图片画廊，纯手工精选，静态部署。',
     q4: '画廊多久更新一次？',
     a4: '每逢收藏有新增就会同步上架，首页的「更新于」日期即最近一次同步时间。',
-    q5: '代号「兰台」是什么意思？',
-    a5: '兰台是汉代皇家藏书之所，这个画廊承其意：一间安静收藏光影的厅堂。',
     download: '下载',
-    codename: '汉室藏书之台，今藏光影万象。',
     notFound: '没有匹配的图片。',
   },
 };
